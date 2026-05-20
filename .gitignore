@@ -5,3 +5,4 @@ __pycache__/
 data/*.csv
 *.h5
 *.pklmkdir e
+./claude

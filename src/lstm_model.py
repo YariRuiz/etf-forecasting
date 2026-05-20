@@ -27,12 +27,12 @@ class LSTMModel:
         
     def _build(self)-> Sequential:
         model = Sequential([
-            Conv1D(filters=128,kernel_size=5, stride=1, 
+            Conv1D(filters=128,kernel_size=5, strides=1, 
                 activation="relu", padding="causal", 
                 input_shape=[self.window_size, 1]),
-            LSTM(self.lstm_units, return_sequencies=True),
+            LSTM(self.lstm_units, return_sequences=True),
             Dropout(self.dropout),
-            LSTM(self.lstm_units, return_sequencies= False),
+            LSTM(self.lstm_units, return_sequences= False),
             Dropout(self.dropout),
             Dense(128, activation="relu", kernel_regularizer=l2(0.01)),
             Dense(1)
@@ -46,4 +46,7 @@ class LSTMModel:
 
         return model
 
-    
+if __name__ == "__main__":
+    model = LSTMModel(window_size=60)
+    model.model.build(input_shape=(None, 60, 1))
+    model.model.summary()

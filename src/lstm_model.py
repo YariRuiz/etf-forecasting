@@ -46,6 +46,29 @@ class LSTMModel:
 
         return model
 
+    def train(self, X_train: np.ndarray, y_train: np.ndarray, epochs: int = 50):
+        """
+        Entrena el modelo.
+
+        Args:
+            X_train: Ventanas de entrenamiento
+            y_train: Valores a predecir
+            epochs: Número máximo de épocas
+        """
+        early_stopping = EarlyStopping(
+            monitor="val_loss",
+            patience=10,
+            restore_best_weights=True
+        )
+        history = self.model.fit(
+            X_train, y_train,
+            epochs=epochs,
+            validation_split=0.2,
+            callbacks=[early_stopping],
+            verbose=1
+        )
+        return history
+
 if __name__ == "__main__":
     model = LSTMModel(window_size=60)
     model.model.build(input_shape=(None, 60, 1))

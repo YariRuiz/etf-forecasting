@@ -6,3 +6,5 @@ data/*.csv
 *.h5
 *.pklmkdir e
 ./claude
+./.vscode
+.CLAUDE.md

@@ -69,6 +69,30 @@ class LSTMModel:
         )
         return history
 
+    def save(self, filepath: str):
+        """
+        Guarda el modelo en disco
+
+        Args: 
+            filepath: Ruta de donde se almacenara el modelo
+        """
+        self.model.save(filepath)
+        print(f"Modelo guardado en: {filepath}")
+
+
+    def load(self, filepath: str):
+        """
+        Carga el modelo guradado
+
+        Args:
+            filepath: Ruta de donde se carga el modelo
+        
+        """
+        self.model = tf.keras.models.load_model(filepath)
+        print(f"Modelo cargado en: {filepath}")
+        
+        
+        
 if __name__ == "__main__":
     model = LSTMModel(window_size=60)
     model.model.build(input_shape=(None, 60, 1))

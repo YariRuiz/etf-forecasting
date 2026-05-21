@@ -48,6 +48,10 @@ def train_pipeline(
     model = LSTMModel(window_size=window_size)
     model.train(X,y, epochs=epochs)
 
+    # Guardar
+    os.makedirs("models", exist_ok=True)
+    model.save(f"models/lstm_{symbol}.keras")
+    
     print("Entrenamiento Completado.")
     return model, min_val, max_val
 
